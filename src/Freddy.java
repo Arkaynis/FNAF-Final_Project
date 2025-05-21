@@ -12,14 +12,14 @@ public class Freddy{
             update();
         }else {
             if ((level > move) && (cam.getUsing() == false) && !(location.equals("East Hall Corner"))){
-                movements++;
-
                 move();
             }
         }
     }
 
     public String move(){
+        movements++;
+        
         location = moveString[movements];
         return location;
     }
