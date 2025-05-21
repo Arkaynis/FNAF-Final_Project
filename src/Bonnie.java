@@ -1,0 +1,5 @@
+class Bonnie {
+    public Bonnie () {
+        
+    }
+}
