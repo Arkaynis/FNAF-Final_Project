@@ -1,31 +1,39 @@
 public class Lights {
-    private static boolean leftLightsState;
-    private static boolean rightLightsState;
+    private boolean leftLightsState;
+    private boolean rightLightsState;
+    private final boolean disabled = false;
 
     public Lights(){
         leftLightsState = false;
         rightLightsState = false;
     }
 
-    public static void leftLightsTrigger(){
-        System.out.println("Left Lights triggered");
-        leftLightsState = true;
+    public void leftLightsTrigger(){
+        leftLightsState = !leftLightsState;
     }
 
-    public static void rightLightsTrigger(){
-        System.out.println("Right Lights triggered");
-        rightLightsState = true;    
+    public void rightLightsTrigger(){
+        rightLightsState = !rightLightsState;    
     }
 
-    public static void leftLightDisable(){
-        System.out.println("Left Lights disabled");
+    public void leftLightDisable(){
+        leftLightsState = disabled;
+    }
+
+    public void rightLightDisable(){
+        rightLightsState = disabled;
+    }
+
+    public boolean getLeftLightsState(){
+        return leftLightsState;
+    }
+
+    public boolean getRightLightsState(){
+        return rightLightsState;
+    }
+
+    public void resetLights() {
         leftLightsState = false;
-    }
-
-    public static void rightLightDisable(){
-        System.out.println("Right Lights disabled");
         rightLightsState = false;
     }
-
-    
 }

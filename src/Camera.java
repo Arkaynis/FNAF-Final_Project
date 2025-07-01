@@ -1,14 +1,28 @@
 public class Camera {
     private boolean using;
-    
-    public boolean getUsing(){
-        using = true;
+    private String currentCamera;
+    private final boolean disabled = false;
 
+    public boolean getUsing(){
         return using;
     }
 
-    public String mapTrigger(){
-        return "";
+    public void useCamera(){
+        using = true;
+    }
+
+    public void notUseCamera(){
+        using = false;
+    }
+
+    public boolean currentCam(String currentCam){
+        currentCamera = currentCam;
+
+        return true;
+    }
+
+    public void disable(){
+        using = disabled;
     }
 
 }
