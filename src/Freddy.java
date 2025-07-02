@@ -14,6 +14,9 @@ public class Freddy{
             level = 20;
         }
     }
+    public Freddy(int customLevel){
+        level = customLevel;
+    }
 
     public boolean update(){
         int move = (int)(Math.random() * 21);
@@ -73,5 +76,9 @@ public class Freddy{
 
     public String getLocation(){
         return location;
+    }
+    
+    public void setLocation(String loc){
+        location = loc;
     }
 }

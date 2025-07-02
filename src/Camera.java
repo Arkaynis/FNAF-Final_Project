@@ -8,11 +8,7 @@ public class Camera {
     }
 
     public void useCamera(){
-        using = true;
-    }
-
-    public void notUseCamera(){
-        using = false;
+        using = !using;
     }
 
     public boolean currentCam(String currentCam){

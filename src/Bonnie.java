@@ -14,6 +14,10 @@ public class Bonnie {
         }
     }
 
+    public Bonnie(int customLevel){
+        level = customLevel;
+    }
+
     public boolean update(Camera cam, Doors door, Lights light){
         camera = cam;
         doors = door;
@@ -109,6 +113,10 @@ public class Bonnie {
                 location = "Jumpscare";
             }
         }
+    }
+
+    public void setLocation(String loc){
+        location = loc;
     }
 
     public String getLocation(){

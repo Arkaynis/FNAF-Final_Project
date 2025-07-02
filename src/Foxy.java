@@ -10,7 +10,11 @@ public class Foxy {
         }
     }
 
-    public void update(Camera cam, int counter){
+    public Foxy(int customLevel){
+        level = customLevel;
+    }
+
+    public void update(Camera cam, int counter, Doors doors){
         int move = (int)(Math.random() * 21) + 1;
         int delayAfterFail = (int)(Math.random() * 18);
 
@@ -19,7 +23,7 @@ public class Foxy {
                     stage++;
 
                     if (stage == 4){
-                        move(cam, counter);
+                        move(cam, counter, doors);
                     }
                 }
             } else {
@@ -27,7 +31,7 @@ public class Foxy {
                 stage++;
 
                 if (stage == 4){
-                    move(cam, counter);
+                    move(cam, counter, doors);
                 }
             }
         }
@@ -53,12 +57,13 @@ public class Foxy {
         }
     }
 
-    public void move(Camera cam, int counter){
+    public void move(Camera cam, int counter, Doors doors){
         if (cam.currentCam("West Hall") == true){
             location = "West Hall";
 
             if (counter % 5 == 0){
                 location = "Office";
+                foxyJumpscare(doors);
             }
         }
 
@@ -71,11 +76,20 @@ public class Foxy {
         return location;
     }
 
+    public void setLocation(String loc){
+        location = loc;
+    }
+
     public int getStage(){
         return stage;
     }
 
-    public void foxyJumpscare(){
+    public void foxyJumpscare(Doors door){
 
+        if (location.equals("Office") && door.getLeftDoorOpen() == false){
+            location = "Jumpscare";
+        }else {
+            location = "Pirate Cove";
+        }
     }
 }

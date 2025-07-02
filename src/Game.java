@@ -37,6 +37,17 @@ public class Game {
         doors = new Doors();
     }
 
+    public Game(int bonnieLevel, int chicaLevel, int foxyLevel, int freddyLevel){
+        freddy = new Freddy(freddyLevel);
+        bonnie = new Bonnie(bonnieLevel);
+        chica = new Chica(chicaLevel);
+        foxy = new Foxy(foxyLevel);
+
+        camera = new Camera();
+        lights = new Lights();
+        doors = new Doors();
+    }
+
     public void tick(int count){
 
         if (powerOutState == false && alive == true){ {
@@ -47,7 +58,7 @@ public class Game {
             if (count % 5 ==0){
                 bonnie.update(camera, doors, lights);
                 chica.update(camera, doors, lights);
-                foxy.update(camera, count);
+                foxy.update(camera, count, doors);
             }
 
             if (count % 7 == 0 && nightInt == 5){
@@ -139,33 +150,38 @@ public class Game {
 
         if (time.equals("2:00 AM")){
             bonnie.timeLevelInc(2);
+            chica.timeLevelInc(2);
+            foxy.timeLevelInc(2);
         }else if (time.equals("3:00 AM")){
             bonnie.timeLevelInc(3);
+            chica.timeLevelInc(3);
+            foxy.timeLevelInc(3);
         }else if (time.equals("4:00 AM")){
             bonnie.timeLevelInc(4);
+            chica.timeLevelInc(4);
+            foxy.timeLevelInc(4);
         }
+
         return time;
     }
 
-    public String updateNight(){
-        nightInt++; // increment night counter
-
-        if (nightInt == 2){
+    public String updateNight(int nightInteger){
+        if (nightInteger == 2){
             night = "2nd Night";
             freddy.nightlyLevel(2);
             bonnie.nightlyLevel(2);
             chica.nightlyLevel(2);
-        }else if (nightInt == 3){
+        }else if (nightInteger == 3){
             night = "3rd Night";
             freddy.nightlyLevel(3);
             bonnie.nightlyLevel(3);
             chica.nightlyLevel(3);
-        }else if (nightInt == 4){
+        }else if (nightInteger == 4){
             night = "4th Night";
             freddy.nightlyLevel(4);
             bonnie.nightlyLevel(4);
             chica.nightlyLevel(4);
-        }else if (nightInt == 5){
+        }else if (nightInteger == 5){
             night = "5th Night";
             freddy.nightlyLevel(5);
             bonnie.nightlyLevel(5);
@@ -199,15 +215,16 @@ public class Game {
         battery = 99;
         doors.resetDoors();
         lights.resetLights();
+
+        bonnie.setLocation("Show Stage");
+        chica.setLocation("Show Stage");
+        freddy.setLocation("Show Stage");
+        foxy.setLocation("Pirate Cove");
     }
 
     public void usingCamera(){
         camera.useCamera(); 
     }
-
-    public void notUsingCamera(){
-        camera.notUseCamera();
-    } 
 
     public String getBonnieLoc(){
         return bonnie.getLocation();
@@ -222,6 +239,11 @@ public class Game {
     }
 
     public String getFoxyLoc(){
+
+        if (foxy.getLocation().equals("Office") && doors.getLeftDoorOpen() == true){
+            battery -= nightInt;
+        }
+
         return foxy.getLocation();
     }
 
